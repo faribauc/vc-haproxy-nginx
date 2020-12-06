@@ -23,6 +23,7 @@ services:
       - nginx
     ports:
       - "80:80"
+      - "9000:9000"
     networks:
       frontend:
         aliases:
