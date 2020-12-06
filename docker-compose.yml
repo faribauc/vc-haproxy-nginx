@@ -9,11 +9,24 @@ services:
     volumes:
       - .:/var/www/html
     ports:
-      - "80:80"
+      - "880:80"
     networks:
       frontend:
         aliases:
           - nginx
+  haproxy:
+    build:
+      context: ./
+      target: vcweb_haproxy
+    image: ${HAPROXY_IMAGE:-vcweb/haproxy}
+    depends_on:
+      - nginx
+    ports:
+      - "80:80"
+    networks:
+      frontend:
+        aliases:
+            - haproxy
 
 networks:
   frontend:
